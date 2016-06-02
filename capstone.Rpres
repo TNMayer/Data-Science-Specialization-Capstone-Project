@@ -1,0 +1,55 @@
+
+========================================================
+# Coursera Data Science Specialization
+## Capstone Presentation - Next Word Prediction (NWP)
+
+TNMayer
+
+June 02, 2016
+
+Overview
+========================================================
+
+
+- The goal of the capstone project was to build a Shiny Application that takes an English sentence as input and predicts the next word. Those kinds are well known e.g. from smartphone keyboards. The whole task was very strongly influenced by the complex and wide field of Natural Language Processing (NLP).
+- The data used to build the prediction model originated from various English texts out of twitter, news, and blog sources. More information on the so called HC text corpus can be found [here] (http://www.corpora.heliohost.org/aboutcorpus.html).
+- My NWP Shiny App for the capstone can be found [here] (https://tnmayer.shinyapps.io/shiny/).
+- To use the app, simply type in your sentence on the left hand side and hit the <ENTER> button of your keyboard for the NWP. The top five single word predictions, if available, with their respective probabilities will be displayed on the right panel of the App.
+
+Sampling and Cleaning the Data
+========================================================
+
+* a random sample containing 10 % of the whole corpus was generated (approximately 550,000 text lines).
+* preprocessing and cleaning of the text (lowercase, remove punctuations, ...)
+* creating tables of the most frequent n-grams (1-gram, 2-gram, 3-gram) in the corpus and store together with the frequencies.
+* calculate the conditional probability of the last word in the n-gram given the last word(s) by a Kneser-Ney interpolation. (refer to [Koerner, 2013] (https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjpu6eD74fNAhXE2SwKHRaaAI0QFgglMAA&url=https%3A%2F%2Fwest.uni-koblenz.de%2Fsites%2Fdefault%2Ffiles%2FBachelorArbeit_MartinKoerner.pdf&usg=AFQjCNGA7C8ioBjHkFsGhJpxE-Xcs2KlLw))
+* store the resulting n-gram tables in data.tables for performance reasons
+* you can find the R-Code for those tasks on my respective [github repository] (https://github.com/TNMayer/Data-Science-Specialization-Capstone-Project).
+
+
+The Algorithm
+========================================================
+
+In a first step the user's input will be cleaned and normalized in order to make it compatible to the n-gram models.
+* If there are more than three words in the input only the last two will be considered. If the last two words match the first two words of one or more 3-gram the matching 3-grams will be extracted and ordered by their precalculated conditional probabilities of their last word. The top 5 predictions will be returned. If there are less than five last words in the list only those will be returned.
+* If there are no matches in the 3-gram table the app will back off to the 2-gram table and do exactly the same than in the 3-gram table but only with the last word of input.
+* On the lowest level the top 5 unigram words will be returned.
+
+Instructions and possible developments
+========================================================
+
+__Instructions__
+
+![alt text](app.png)
+
+__1)__ Input can be entered.    
+__2)__ different topics can be explored.          
+__3)__ Predictions are displayed.
+
+***
+__Developments__
+
+* Extend model to 4 and 5-gram level.
+* Implement the whole given language corpus in the model.
+* Cross-validate the results with other smoothing procedures like Good-Turing.
+* Include n-gram tables based on user inputs and learn from the user.
