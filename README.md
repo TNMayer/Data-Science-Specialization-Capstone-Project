@@ -1,8 +1,4 @@
-# Practical-Machine-Learning
+# JHU/Coursera Data Science Specialization
+## Capstone Project
 
-This is the submission of TNMayer for the Practical Machine Learning class on coursera. The submission contains:
-* a .Rmd-file
-* a .html-file
-* a .md-file
-
-If you want to display everything on github in your browser you should use the .md-file. However, also the .Rmd and .html-files are provided.
+This is the submission of TNMayer for the final capstone project of the Data Science Specialization on Coursera. This repository contains all of the used code to build the n-gram-models, the used Kneser-Ney interpolation for probability estimations, back-off, the presentation and of course the Shiny App hosted on shinyapp.io.
